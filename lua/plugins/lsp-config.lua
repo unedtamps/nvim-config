@@ -19,6 +19,7 @@ return {
 					"html",
 					"htmx",
 					"cssls",
+					"templ",
 				},
 			})
 		end,
@@ -36,6 +37,13 @@ return {
 			lspconfig.html.setup({})
 			lspconfig.htmx.setup({})
 			lspconfig.cssls.setup({})
+			lspconfig.templ.setup({})
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					underline = true,
+					virtual_text = true,
+					signs = true,
+				})
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})

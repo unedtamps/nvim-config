@@ -1,5 +1,7 @@
 return {
-  "tmsvg/pear-tree",
-  config = function ()
-  end
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {}, -- this is equalent to setup({}) function
+	},
 }
