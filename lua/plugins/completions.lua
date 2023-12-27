@@ -9,9 +9,11 @@ return {
 			"hrsh7th/cmp-path",
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
 		},
 		opts = function()
 			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+			require("luasnip.loaders.from_vscode").lazy_load()
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			return {

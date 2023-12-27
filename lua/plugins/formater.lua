@@ -8,6 +8,7 @@ return {
 			formatters_by_ft = {
 				javascript = { "prettier" },
 				json = { "prettier" },
+				html = { "prettier" },
 				go = { "gofumt", "goimports", "golines" },
 				lua = { "stylua" },
 				c = { "clang_format" },

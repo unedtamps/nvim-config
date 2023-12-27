@@ -20,6 +20,7 @@ return {
 					"htmx",
 					"cssls",
 					"templ",
+					"tailwindcss",
 				},
 			})
 		end,
@@ -37,6 +38,7 @@ return {
 			lspconfig.html.setup({})
 			lspconfig.htmx.setup({})
 			lspconfig.cssls.setup({})
+			lspconfig.tailwindcss.setup({})
 			lspconfig.templ.setup({})
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
