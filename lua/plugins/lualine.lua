@@ -187,11 +187,11 @@ local colors = {
 			color = { fg = colors.green, gui = "italic" },
 		})
 
-		--ins_right({
-		--	"filename",
-		--	cond = conditions.buffer_not_empty,
-		--	color = { fg = colors.magenta, gui = "bold" },
-		--})
+		ins_right({
+			"filename",
+			cond = conditions.buffer_not_empty,
+			color = { fg = colors.magenta, gui = "bold" },
+		})
 
 		ins_right({
 			"filetype",

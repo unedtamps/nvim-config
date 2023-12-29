@@ -31,8 +31,8 @@ return {
 			},
 		})
 		--require("telescope").load_extension('harpoon')
-		vim.keymap.set("n", "J", require("harpoon.ui").nav_next)
-		vim.keymap.set("n", "K", require("harpoon.ui").nav_prev)
+		vim.keymap.set("n", "<c-j>", require("harpoon.ui").nav_next)
+		vim.keymap.set("n", "<c-k>", require("harpoon.ui").nav_prev)
 		vim.keymap.set("n", "<leader>hx", require("harpoon.mark").add_file)
 		vim.keymap.set("n", "M", require("harpoon.ui").toggle_quick_menu)
 	end,

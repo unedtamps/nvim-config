@@ -21,6 +21,7 @@ return {
 					"cssls",
 					"templ",
 					"tailwindcss",
+					"jdtls",
 				},
 			})
 		end,
@@ -40,6 +41,7 @@ return {
 			lspconfig.cssls.setup({})
 			lspconfig.tailwindcss.setup({})
 			lspconfig.templ.setup({})
+			lspconfig.jdtls.setup({})
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 					underline = true,
@@ -49,6 +51,7 @@ return {
 			vim.keymap.set("n", "H", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
 		end,
 	},
 	{
