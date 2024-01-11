@@ -15,13 +15,18 @@ return {
 					"intelephense",
 					"tsserver",
 					"clangd",
-					"sqlls",
 					"html",
 					"htmx",
 					"cssls",
 					"templ",
 					"tailwindcss",
 					"jdtls",
+					"svelte",
+					"marksman",
+					"jsonls",
+					"hydra_lsp",
+					"sqlls",
+					"prismals",
 				},
 			})
 		end,
@@ -29,19 +34,66 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.gopls.setup({})
-			lspconfig.intelephense.setup({})
-			lspconfig.tsserver.setup({})
-			lspconfig.clangd.setup({})
-			lspconfig.sqlls.setup({})
-			lspconfig.html.setup({})
-			lspconfig.htmx.setup({})
-			lspconfig.cssls.setup({})
-			lspconfig.tailwindcss.setup({})
-			lspconfig.templ.setup({})
-			lspconfig.jdtls.setup({})
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.gopls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.intelephense.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.tsserver.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.clangd.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.sqlls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.html.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				filetypes = { "html", "templ" },
+			})
+			lspconfig.htmx.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				filetypes = { "html", "templ" },
+			})
+			lspconfig.cssls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.prismals.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.tailwindcss.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				filetypes = { "templ", "astro", "javascript", "typescript", "react", "blade" },
+				init_options = { userLanguages = { templ = "html" } },
+			})
+			lspconfig.templ.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.jdtls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.svelte.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.marksman.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.jsonls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.hydra_lsp.setup({
+				capabilities = capabilities,
+			})
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 					underline = true,

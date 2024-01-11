@@ -4,7 +4,7 @@ return {
 		tag = "*",
 		config = function()
 			require("toggleterm").setup({
-				size = 60,
+				size = 20,
 				open_mapping = "<c-t>",
 				hide_numbers = true,
 				shade_filetypes = {},
@@ -13,7 +13,7 @@ return {
 				start_in_insert = true,
 				insert_mapping = true,
 				persist_size = true,
-				direction = "vertical",
+				direction = "horizontal",
 				close_on_exit = true,
 				shell = vim.o.shell,
 				float_opts = {
@@ -37,6 +37,32 @@ return {
 				vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 			end
 			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+		end,
+	},
+	{
+		"VonHeikemen/fine-cmdline.nvim",
+		requires = {
+			{ "MunifTanjim/nui.nvim" },
+		},
+		config = function()
+			require("fine-cmdline").setup({
+				popup = {
+					position = {
+						row = "50%",
+						col = "50%",
+					},
+					size = {
+						width = "30%",
+					},
+					border = {
+						style = "rounded",
+					},
+					win_options = {
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+					},
+				},
+			})
+			vim.api.nvim_set_keymap("n", ":", "<cmd>FineCmdline<CR>", { noremap = true })
 		end,
 	},
 }
