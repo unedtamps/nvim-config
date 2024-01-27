@@ -46,7 +46,7 @@ return {
 				map("n", "<leader>hR", gs.reset_buffer)
 				map("n", "<leader>hp", gs.preview_hunk)
 				map("n", "<leader>hb", function()
-					gs.blame_line({ full = true })
+					gs.blame_line({ full = false })
 				end)
 				map("n", "<leader>tb", gs.toggle_current_line_blame)
 				map("n", "<leader>hd", gs.diffthis)

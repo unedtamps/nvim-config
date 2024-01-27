@@ -25,6 +25,14 @@ return {
 				local cmp = require("cmp")
 				local defaults = require("cmp.config.default")()
 				return {
+					cmp.setup.cmdline(":", {
+						mapping = cmp.mapping.preset.cmdline(),
+						sources = cmp.config.sources({
+							{ name = "path" },
+						}, {
+							{ name = "cmdline" },
+						}),
+					}),
 					completion = {
 						completeopt = "menu,menuone,noinsert",
 					},
@@ -83,6 +91,12 @@ return {
 					source.group_index = source.group_index or 1
 				end
 				require("cmp").setup(opts)
+				vim.api.nvim_exec(
+					[[
+  autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+]],
+					false
+				)
 			end,
 		},
 	},

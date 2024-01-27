@@ -15,7 +15,8 @@ return {
 				c = { "clang_format" },
 				cpp = { "clang_format" },
 				php = { "php_cs_fixer" },
-				blade = { "blade-formatter" },
+				blade = { "tlint" },
+				python = { "isort", "black" },
 			},
 
 			format_on_save = {

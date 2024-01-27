@@ -27,6 +27,8 @@ return {
 					"hydra_lsp",
 					"sqlls",
 					"prismals",
+					"stimulus_ls",
+					"pylsp",
 				},
 			})
 		end,
@@ -57,7 +59,7 @@ return {
 			lspconfig.html.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
-				filetypes = { "html", "templ" },
+				filetypes = { "html", "templ", "blade" },
 			})
 			lspconfig.htmx.setup({
 				on_attach = on_attach,
@@ -74,7 +76,12 @@ return {
 				capabilities = capabilities,
 				on_attach = on_attach,
 				filetypes = { "templ", "astro", "javascript", "typescript", "react", "blade" },
-				init_options = { userLanguages = { templ = "html" } },
+				init_options = { userLanguages = { templ = "html" }, { blade = "html" } },
+			})
+			lspconfig.stimulus_ls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				filetypes = { "blade" },
 			})
 			lspconfig.templ.setup({
 				capabilities = capabilities,
@@ -92,6 +99,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.hydra_lsp.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.pylsp.setup({
 				capabilities = capabilities,
 			})
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
