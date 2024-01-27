@@ -13,7 +13,7 @@ return {
 	init = function()
 		-- Your DBUI configuration
 		vim.g.db_ui_use_nerd_fonts = 1
-		vim.g.db_ui_env_variable_url = "MYSQL_DB"
-		vim.g.db_ui_env_variable_name = "MYSQL_DB_NAME"
+    vim.keymap("n", "<leader>db", "<cmd>DBUIToggle <c-w>r<CR>")
 	end,
 }
+
