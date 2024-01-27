@@ -11,5 +11,8 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "p", '"_dp')
-vim.keymap.set("n", "<C-`>", "<C-w>k<CR>")
-vim.keymap.set("n", "<C-~>", "<C-w>j<CR>")
+
+-- notes : <C-w>z toogle preview result
+-- <c-w>r change draw postiio
+-- <c-w>k and <c-w>j atas bawah
+--

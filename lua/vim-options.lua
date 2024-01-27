@@ -34,6 +34,11 @@ vim.cmd([[
     autocmd BufRead,BufNewFile *.templ set filetype=templ
   augroup END
 ]])
+vim.cmd([[
+augroup BladeFiltypeRelated
+  au BufNewFile,BufRead *.blade.php set ft=blade
+augroup END
+]])
 
 vim.api.nvim_exec(
 	[[
