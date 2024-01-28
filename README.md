@@ -1,4 +1,4 @@
-# my nvim config
+# Novim Personal
 
 ## installation
 1. Download [Neovim](https://github.com/neovim/neovim/releases/download/v0.9.4/nvim.appimage)
@@ -13,3 +13,8 @@
    ```shell
     ./nvim.appimage .
    ```
+
+   ## Pics
+   ![Greater](./asset/greater.png)
+
+   ![Ediotr](./asset/editor.png)
