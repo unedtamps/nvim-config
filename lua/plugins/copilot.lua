@@ -24,7 +24,7 @@ return {
 				auto_trigger = true,
 				debounce = 25,
 				keymap = {
-					accept = "<right>",
+					accept = "<tab>",
 					accept_word = false,
 					accept_line = false,
 					next = "<down>",
@@ -33,10 +33,10 @@ return {
 				},
 			},
 			filetypes = {
-				yaml = false,
+				yaml = true,
 				markdown = true,
 				help = false,
-				gitcommit = false,
+				gitcommit = true,
 				gitrebase = false,
 				hgcommit = false,
 				svn = false,
