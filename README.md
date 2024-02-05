@@ -6,7 +6,7 @@
    ```shell
    git clone https://github.com/unedtamps/nvim-config.git ~/.config/nvim
    ```
-3. Run neovim
+3. Run nvim
    ```shell
    chmod +x nvim.appimage
    ```
