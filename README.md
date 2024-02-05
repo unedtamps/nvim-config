@@ -7,9 +7,9 @@
    git clone https://github.com/unedtamps/nvim-config.git ~/.config/nvim
    ```
 3. Run neovim
-   ```shell
-   chomod +x nvim.appimage
-   ```
+   ``
+   chmodo +x nvim.appimage
+   ``
    ```shell
     ./nvim.appimage .
    ```
