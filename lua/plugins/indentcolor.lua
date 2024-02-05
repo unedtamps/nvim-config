@@ -27,13 +27,10 @@ return {
 			vim.api.nvim_set_hl(0, "scopeColor", { fg = "#ffea00" })
 		end)
 		vim.g.rainbow_delimiters = { highlight = highlight }
-		local current_filetype = string.lower(vim.bo.filetype)
-		if current_filetype ~= "" then
-			require("ibl").setup({
-				indent = { highlight = highlight },
-				scope = { highlight = scopeColor },
-			})
-		end
+		require("ibl").setup({
+			indent = { highlight = highlight },
+			scope = { highlight = scopeColor },
+		})
 		hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 	end,
 }

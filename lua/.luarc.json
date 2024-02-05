@@ -5,6 +5,7 @@
     "diagnostics.disable": [
         "undefined-doc-name",
         "undefined-field",
-        "undefined-global"
+        "undefined-global",
+        "need-check-nil"
     ]
 }

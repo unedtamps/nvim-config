@@ -55,6 +55,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100 })
 	end,
 })
-
 vim.o.title = true
+
+vim.api.nvim_exec(
+	[[
+  augroup UpdateTitle
+    autocmd!
+    autocmd BufEnter * let &titlestring = expand("%:~:.")
+  augroup END
+]],
+	false
+)
 vim.g.netrw_banner = 0

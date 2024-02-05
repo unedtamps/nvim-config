@@ -17,6 +17,7 @@ return {
 				php = { "php_cs_fixer" },
 				blade = { "tlint" },
 				python = { "isort", "black" },
+				yaml = { "prettier" },
 			},
 
 			format_on_save = {

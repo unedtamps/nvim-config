@@ -29,6 +29,9 @@ return {
 					"prismals",
 					"stimulus_ls",
 					"pylsp",
+					"bashls",
+					"dockerls",
+					"docker_compose_language_service",
 				},
 			})
 		end,
@@ -41,10 +44,19 @@ return {
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
+			lspconfig.docker_compose_language_service.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.dockerls.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.gopls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.intelephense.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.bashls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.tsserver.setup({

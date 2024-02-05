@@ -34,6 +34,7 @@ return {
 			},
 			filetypes = {
 				yaml = true,
+				dockerfile = true,
 				markdown = true,
 				help = false,
 				gitcommit = true,

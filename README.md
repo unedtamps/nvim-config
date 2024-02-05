@@ -8,7 +8,7 @@
    ```
 3. Run neovim
    ```shell
-   chomod +x nvim.appimage
+   chmod +x nvim.appimage
    ```
    ```shell
     ./nvim.appimage .
