@@ -26,8 +26,8 @@ return {
 		}
 		dashboard.section.buttons.val = {
 			dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-			dashboard.button("d", "🗀  Find Dir", "<leader>pd"),
-			dashboard.button("f", "🗎  Find file", "<leader>pf"),
+			dashboard.button("d", "🗀  Find Dir", ":Telescope file_browser<CR>"),
+			dashboard.button("f", "🗎  Find file", ":Telescope find_files<CR>"),
 			dashboard.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
 		}
 		dashboard.section.footer.val = "Software is like sex: it's better when it's free"

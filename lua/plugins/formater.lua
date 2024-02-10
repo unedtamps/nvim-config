@@ -18,6 +18,7 @@ return {
 				blade = { "tlint" },
 				python = { "isort", "black" },
 				yaml = { "prettier" },
+				java = { "google-java-format" },
 			},
 
 			format_on_save = {
