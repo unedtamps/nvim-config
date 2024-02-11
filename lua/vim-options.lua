@@ -66,4 +66,5 @@ vim.api.nvim_exec(
 ]],
 	false
 )
+vim.o.wildoptions = vim.o.wildoptions:gsub(",pum", "")
 vim.g.netrw_banner = 0

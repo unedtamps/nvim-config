@@ -39,48 +39,4 @@ return {
 			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 		end,
 	},
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-		config = function()
-			require("noice").setup({
-				routes = {
-					{
-						filter = { event = "notify", find = "No information available" },
-						opts = { skip = true },
-					},
-				},
-				presets = {
-					lsp_doc_border = true, -- add a border to hover docs and signature help
-				},
-				popupmenu = {
-					enabled = true, -- enables the Noice popupmenu UI
-					backend = "cmp", -- backend to use to show regular cmdline completions
-					relative = "editor",
-					position = {
-						row = 8,
-						col = "50%",
-					},
-					size = {
-						width = 60,
-						height = 10,
-					},
-					border = {
-						style = "rounded",
-						padding = { 0, 1 },
-					},
-					win_options = {
-						winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-					},
-				},
-			})
-		end,
-	},
 }
