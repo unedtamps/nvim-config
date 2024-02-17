@@ -53,7 +53,7 @@ return {
 							require("luasnip").lsp_expand(args.body)
 							require("luasnip").filetype_extend(
 								"ruby",
-								"rails",
+								{ "rails" },
 								"typescript",
 								"javascript",
 								"typescriptreact",
@@ -123,35 +123,42 @@ return {
 		},
 	},
 	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
+		"VonHeikemen/fine-cmdline.nvim",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
 		},
 		config = function()
-			require("noice").setup({
-				presets = {
-					lsp_doc_border = true, -- add a border to hover docs and signature help
+			require("fine-cmdline").setup({
+				cmdline = {
+					enable_keymaps = true,
+					smart_history = true,
+					prompt = ": ",
 				},
-				routes = {
-					filter = { event = "notify", find = "No information available" },
-					opts = { skip = true },
+				popup = {
+					position = {
+						row = "50%",
+						col = "50%",
+					},
+					size = {
+						width = "40%",
+					},
+					border = {
+						style = "rounded",
+					},
+					win_options = {
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+					},
 				},
-				messages = {
-					-- NOTE: If you enable messages, then the cmdline is enabled automatically.
-					-- This is a current Neovim limitation.
-					enabled = false, -- enables the Noice messages UI
-					view = "mini", -- default view for messages
-					view_error = "notify", -- view for errors
-					view_warn = "notify", -- view for warnings
-					view_history = "notify", -- view for :messages
-					view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+				hooks = {
+					set_keymaps = function(imap, feedkeys)
+						-- code
+						local fn = require("fine-cmdline").fn
+						imap("J", fn.next_item)
+						imap("K", fn.previous_item)
+					end,
 				},
 			})
 		end,
+		vim.api.nvim_set_keymap("n", ":", "<cmd>FineCmdline<CR>", { noremap = true }),
 	},
 }

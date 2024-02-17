@@ -34,6 +34,7 @@ vim.cmd([[
     autocmd BufRead,BufNewFile *.templ set filetype=templ
   augroup END
 ]])
+
 vim.cmd([[
 augroup BladeFiltypeRelated
   au BufNewFile,BufRead *.blade.php set ft=blade
@@ -44,6 +45,13 @@ vim.api.nvim_exec(
 	[[
   autocmd FileType html,xml,xsl,jsx,tsx,js,json,php,vue EmmetInstall
 ]],
+	false
+)
+
+vim.api.nvim_exec(
+	[[
+autocmd FileType apache setlocal commentstring=#\ %s
+  ]],
 	false
 )
 

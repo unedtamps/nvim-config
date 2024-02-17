@@ -1,6 +1,5 @@
-vim.keymap.set("n", "B", "^")
-vim.keymap.set("n", "<leader>ff", "F")
 vim.keymap.set("n", "U", "<c-r>")
+vim.keymap.set("n", "L", "^")
 --vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

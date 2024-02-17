@@ -27,6 +27,13 @@ return {
 						"g++ -o $filenameWithoutExt $filename &&",
 						"./$filenameWithoutExt",
 					},
+					go = {
+						"go run .",
+					},
+					rust = {
+						"cargo build &&",
+						"./target/debug/$filenameWithoutExt",
+					},
 				},
 				startinsert = true,
 				mode = "float",

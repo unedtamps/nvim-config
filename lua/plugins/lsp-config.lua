@@ -27,11 +27,11 @@ return {
 					"hydra_lsp",
 					"sqlls",
 					"prismals",
-					"stimulus_ls",
 					"pylsp",
 					"bashls",
 					"dockerls",
 					"docker_compose_language_service",
+					"rust_analyzer",
 				},
 			})
 		end,
@@ -41,8 +41,26 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
+			local config = require("lspconfig.configs")
+			config.blade = {
+				default_config = {
+					cmd = { "/home/unedotamps/Code/PHP/LSP/laravel-dev-tools/laravel-dev-tools", "lsp", "-vvv" },
+					filetypes = { "blade" },
+					root_dir = function(fname)
+						return lspconfig.util.find_git_ancestor(fname)
+					end,
+					settings = {},
+				},
+			}
+			lspconfig.blade.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
+			})
+			lspconfig.rust_analyzer.setup({
+				capabilities = capabilities,
+				filetypes = { "rust" },
 			})
 			lspconfig.docker_compose_language_service.setup({
 				capabilities = capabilities,
@@ -67,6 +85,9 @@ return {
 			})
 			lspconfig.sqlls.setup({
 				capabilities = capabilities,
+				root_dir = function()
+					return vim.fn.getcwd()
+				end,
 			})
 			lspconfig.html.setup({
 				on_attach = on_attach,
@@ -87,13 +108,8 @@ return {
 			lspconfig.tailwindcss.setup({
 				capabilities = capabilities,
 				on_attach = on_attach,
-				filetypes = { "templ", "astro", "javascript", "typescript", "react", "blade" },
+				filetypes = { "templ", "astro", "javascript", "typescript", "typescriptreact", "react", "blade" },
 				init_options = { userLanguages = { templ = "html" }, { blade = "html" } },
-			})
-			lspconfig.stimulus_ls.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				filetypes = { "blade" },
 			})
 			lspconfig.templ.setup({
 				capabilities = capabilities,
@@ -122,28 +138,13 @@ return {
 					virtual_text = true,
 					signs = true,
 				})
+			vim.diagnostic.update_in_insert = true
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 			vim.keymap.set("n", "H", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "<leader>da", vim.diagnostic.open_float, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
-		end,
-	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		config = function()
-			local mason_tool = require("mason-tool-installer")
-			mason_tool.setup({
-				ensure_installed = {
-					"prettier",
-					"stylua",
-					"isort",
-					"black",
-					"eslint_d",
-					"phpcs",
-					"golangci-lint",
-					"cpplint",
-				},
-			})
 		end,
 	},
 	{
