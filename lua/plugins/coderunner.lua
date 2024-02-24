@@ -28,11 +28,12 @@ return {
 						"./$filenameWithoutExt",
 					},
 					go = {
-						"go run .",
+						"go build $filename &&",
+						"./$filenameWithoutExt",
 					},
 					rust = {
-						"cargo build &&",
-						"./target/debug/$filenameWithoutExt",
+						"rustc $filename &&",
+						"./$filenameWithoutExt",
 					},
 				},
 				startinsert = true,

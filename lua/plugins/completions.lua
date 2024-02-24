@@ -86,9 +86,9 @@ return {
 					formatting = {
 						format = function(entry, vim_item)
 							vim_item.menu = ({
-								nvim_lsp = "🪛",
-								copilot = "🤖",
-								luasnip = "🔑",
+								nvim_lsp = "🔧 [LSP]",
+								copilot = "🤖 [CO]",
+								luasnip = "🔑 [LuaSnip]",
 								path = "[Path]",
 								buffer = "[Buffer]",
 							})[entry.source.name]

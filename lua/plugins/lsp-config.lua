@@ -6,6 +6,12 @@ return {
 		end,
 	},
 	{
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").on_attach()
+		end,
+	},
+	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
@@ -14,6 +20,7 @@ return {
 					"gopls",
 					"intelephense",
 					"tsserver",
+					"r_language_server",
 					"clangd",
 					"html",
 					"htmx",
@@ -42,6 +49,10 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local config = require("lspconfig.configs")
+			local signature = function(_, bufnr)
+				require("lsp_signature").on_attach(signature_setup, bufnr) -- Note: add in lsp client on-attach
+			end
+
 			config.blade = {
 				default_config = {
 					cmd = { "/home/unedotamps/Code/PHP/LSP/laravel-dev-tools/laravel-dev-tools", "lsp", "-vvv" },
@@ -53,42 +64,56 @@ return {
 				},
 			}
 			lspconfig.blade.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.lua_ls.setup({
+				on_attach = signature,
+				capabilities = capabilities,
+			})
+			lspconfig.r_language_server.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.rust_analyzer.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 				filetypes = { "rust" },
 			})
 			lspconfig.docker_compose_language_service.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.dockerls.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.intelephense.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.bashls.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.tsserver.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.clangd.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
-			lspconfig.sqlls.setup({
-				capabilities = capabilities,
-				root_dir = function()
-					return vim.fn.getcwd()
-				end,
-			})
+			-- lspconfig.sqlls.setup({
+			-- 	capabilities = capabilities,
+			-- 	root_dir = function()
+			-- 		return vim.fn.getcwd()
+			-- 	end,
+			-- })
 			lspconfig.html.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -115,21 +140,27 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.jdtls.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.svelte.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.marksman.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.jsonls.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.hydra_lsp.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			lspconfig.pylsp.setup({
+				on_attach = signature,
 				capabilities = capabilities,
 			})
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
