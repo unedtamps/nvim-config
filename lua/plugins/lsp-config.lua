@@ -7,10 +7,19 @@ return {
 	},
 	{
 		"ray-x/lsp_signature.nvim",
-		config = function()
-			require("lsp_signature").on_attach()
+		event = "VeryLazy",
+		opts = {},
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
 		end,
 	},
+	{
+		"lvimuser/lsp-inlayhints.nvim",
+		config = function()
+			require("lsp-inlayhints").setup()
+		end,
+	},
+
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
@@ -49,8 +58,9 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local config = require("lspconfig.configs")
-			local signature = function(_, bufnr)
-				require("lsp_signature").on_attach(signature_setup, bufnr) -- Note: add in lsp client on-attach
+			local on_attach = function(client, bufnr)
+				require("lsp-inlayhints").on_attach(client, bufnr)
+				require("lsp-signature").on_attach(signature_setup, bufnr)
 			end
 
 			config.blade = {
@@ -64,49 +74,54 @@ return {
 				},
 			}
 			lspconfig.blade.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.lua_ls.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.r_language_server.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.rust_analyzer.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 				filetypes = { "rust" },
 			})
 			lspconfig.docker_compose_language_service.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.dockerls.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
-				on_attach = signature,
+				lsp_inlay_hints = { enable = false },
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.intelephense.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.bashls.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.tsserver.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.clangd.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
+				cmd = {
+					"clangd",
+					"--offset-encoding=utf-16",
+				},
 			})
 			-- lspconfig.sqlls.setup({
 			-- 	capabilities = capabilities,
@@ -140,37 +155,43 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.jdtls.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.svelte.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.marksman.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.jsonls.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.hydra_lsp.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			lspconfig.pylsp.setup({
-				on_attach = signature,
+				on_attach = on_attach,
 				capabilities = capabilities,
 			})
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-					underline = true,
+					underline = false,
 					virtual_text = true,
 					signs = true,
 				})
-			vim.diagnostic.update_in_insert = true
+			local on_references = vim.lsp.handlers["textDocument/references"]
+			vim.lsp.handlers["textDocument/references"] = vim.lsp.with(on_references, {
+				-- Use location list instead of quickfix list
+				loclist = true,
+			})
+			vim.diagnostic.update_in_insert = false
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
 			vim.keymap.set("n", "H", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>da", vim.diagnostic.open_float, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
