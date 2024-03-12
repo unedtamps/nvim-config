@@ -16,7 +16,20 @@ return {
 	{
 		"lvimuser/lsp-inlayhints.nvim",
 		config = function()
-			require("lsp-inlayhints").setup()
+			require("lsp-inlayhints").setup({})
+			vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = "LspAttach_inlayhints",
+				callback = function(args)
+					if not (args.data and args.data.client_id) then
+						return
+					end
+
+					local bufnr = args.buf
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					require("lsp-inlayhints").on_attach(client, bufnr)
+				end,
+			})
 		end,
 	},
 
@@ -58,8 +71,7 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local config = require("lspconfig.configs")
-			local on_attach = function(client, bufnr)
-				require("lsp-inlayhints").on_attach(client, bufnr)
+			local on_attach = function(_, bufnr)
 				require("lsp-signature").on_attach(signature_setup, bufnr)
 			end
 
@@ -87,7 +99,6 @@ return {
 			})
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,
-				capabilities = capabilities,
 				filetypes = { "rust" },
 			})
 			lspconfig.docker_compose_language_service.setup({
@@ -130,7 +141,6 @@ return {
 			-- 	end,
 			-- })
 			lspconfig.html.setup({
-				on_attach = on_attach,
 				capabilities = capabilities,
 				filetypes = { "html", "templ", "blade" },
 			})

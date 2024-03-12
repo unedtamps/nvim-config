@@ -23,6 +23,7 @@ return {
 					yaml = { "yamlfmt" },
 					java = { "google-java-format" },
 					sql = { "sql-formatter" },
+					sh = { "shfmt" },
 				},
 
 				format_on_save = {

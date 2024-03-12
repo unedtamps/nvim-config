@@ -187,14 +187,15 @@ local colors = {
 
 		ins_right({
 			"filename",
+			path = 1,
 			cond = conditions.buffer_not_empty,
-			color = { fg = colors.magenta, gui = "bold" },
+			color = { fg = colors.violet, gui = "bold", bg = colors.darkblue },
 		})
 
 		ins_right({
 			"filetype",
-			fmt = string.upper,
-			icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+			-- fmt = string.upper,
+			icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
 			color = { fg = colors.cyan, gui = "bold" },
 		})
 

@@ -29,7 +29,9 @@ return {
 				highlight = "NeoTreeFileIcon",
 			},
 		})
-		vim.keymap.set("n", "<leader>nv", ":Neotree filesystem reveal left<CR>")
-		vim.keymap.set("n", "<leader>ns", ":Neotree filesystem close<CR>")
+		vim.keymap.set("n", "<leader>nv", "<cmd>Neotree filesystem reveal left<CR>")
+		vim.keymap.set("n", "<leader>nb", "<cmd>Neotree float buffers<CR>")
+		vim.keymap.set("n", "<leader>ng", "<cmd>Neotree float git_status<CR>")
+		vim.keymap.set("n", "<leader>ns", "<cmd>Neotree filesystem close<CR>")
 	end,
 }

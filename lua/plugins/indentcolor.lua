@@ -4,12 +4,12 @@ return {
 	opts = {},
 	config = function()
 		local highlight = {
-			"RainbowRed",
+			"RainbowGreen",
 			"RainbowBlue",
 			"RainbowViolet",
 			"RainbowCyan",
-			"RainbowGreen",
 			"RainbowOrange",
+			"RainbowRed",
 			"RainbowYellow",
 		}
 		local scopeColor = {

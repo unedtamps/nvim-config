@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 
 vim.cmd("set number relativenumber")
-vim.opt.guicursor = ""
 vim.opt.wrap = true
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -22,6 +21,7 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set clipboard=unnamedplus")
 vim.cmd("set foldmethod=syntax")
+vim.cmd("set numberwidth=5")
 
 vim.api.nvim_set_option("signcolumn", "yes:2")
 
@@ -74,5 +74,6 @@ vim.api.nvim_exec(
 ]],
 	false
 )
+
 vim.o.wildoptions = vim.o.wildoptions:gsub(",pum", "")
 vim.g.netrw_banner = 0

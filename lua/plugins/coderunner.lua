@@ -16,8 +16,12 @@ return {
 		config = function()
 			require("code_runner").setup({
 				filetypes = {
-					javascript = "nodemon index.js",
-					typescript = "nodemon index.ts",
+					javascript = "nodemon $filename",
+					typescript = {
+						"tsc $filename &&",
+						"node $filenameWithoutExt.js",
+					},
+					r = "Rscript $filename",
 					python = "python $filename",
 					c = {
 						"gcc -o $filenameWithoutExt $filename &&",
@@ -31,10 +35,7 @@ return {
 						"go build $filename &&",
 						"./$filenameWithoutExt",
 					},
-					rust = {
-						"rustc $filename &&",
-						"./$filenameWithoutExt",
-					},
+					rust = "cargo run",
 				},
 				startinsert = true,
 				mode = "float",
