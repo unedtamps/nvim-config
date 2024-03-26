@@ -22,7 +22,7 @@ return {
 						"node $filenameWithoutExt.js",
 					},
 					r = "Rscript $filename",
-					python = "python $filename",
+					python = "python3.10 $filename",
 					c = {
 						"gcc -o $filenameWithoutExt $filename &&",
 						"./$filenameWithoutExt",

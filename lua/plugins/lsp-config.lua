@@ -48,6 +48,7 @@ return {
 					"htmx",
 					"cssls",
 					"templ",
+					"awk_ls",
 					"tailwindcss",
 					"jdtls",
 					"svelte",
@@ -56,11 +57,13 @@ return {
 					"hydra_lsp",
 					"sqlls",
 					"prismals",
-					"pylsp",
+					"pyright",
 					"bashls",
 					"dockerls",
+					"asm_lsp",
 					"docker_compose_language_service",
 					"rust_analyzer",
+					"kotlin_language_server",
 				},
 			})
 		end,
@@ -77,7 +80,7 @@ return {
 
 			config.blade = {
 				default_config = {
-					cmd = { "/home/unedotamps/Code/PHP/LSP/laravel-dev-tools/laravel-dev-tools", "lsp", "-vvv" },
+					cmd = { "/home/unedotamps/Koding/PHP/LSP/laravel-dev-tools/laravel-dev-tools", "lsp", "-vvv" },
 					filetypes = { "blade" },
 					root_dir = function(fname)
 						return lspconfig.util.find_git_ancestor(fname)
@@ -85,9 +88,23 @@ return {
 					settings = {},
 				},
 			}
+			lspconfig.kotlin_language_server.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+
+			lspconfig.awk_ls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
 			lspconfig.blade.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+			})
+			lspconfig.asm_lsp.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				root_dir = lspconfig.util.root_pattern("Makefile", ".git"),
 			})
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
@@ -111,6 +128,14 @@ return {
 			})
 			lspconfig.gopls.setup({
 				lsp_inlay_hints = { enable = false },
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					constantValues = true,
+					functionTypeParameters = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
+				},
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
@@ -123,6 +148,33 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.tsserver.setup({
+				settings = {
+					typescript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+					javascript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+				},
+
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
@@ -184,7 +236,7 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.pylsp.setup({
+			lspconfig.pyright.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})

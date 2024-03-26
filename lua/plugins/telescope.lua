@@ -21,7 +21,8 @@ return {
 						require("telescope.themes").get_dropdown({}),
 					},
 				},
-				defaults = { file_ignore_patterns = { "node_modules" } },
+				-- config - config coba di default
+				defaults = { file_ignore_patterns = { "node_modules" }, initial_mode = "insert" },
 			})
 			require("telescope").load_extension("ui-select")
 		end,

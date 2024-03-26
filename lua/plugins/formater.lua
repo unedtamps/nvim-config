@@ -24,6 +24,7 @@ return {
 					java = { "google-java-format" },
 					sql = { "sql-formatter" },
 					sh = { "shfmt" },
+					assembly = { "asmfmt" },
 				},
 
 				format_on_save = {

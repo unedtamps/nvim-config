@@ -21,7 +21,8 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set clipboard=unnamedplus")
 vim.cmd("set foldmethod=syntax")
-vim.cmd("set numberwidth=5")
+vim.cmd("set numberwidth=3")
+vim.cmd("set guioptions+=T")
 
 vim.api.nvim_set_option("signcolumn", "yes:2")
 
