@@ -19,6 +19,9 @@ return {
 					},
 				},
 			},
+			indent = {
+				padding = 0,
+			},
 			icon = {
 				folder_closed = "",
 				folder_open = "",

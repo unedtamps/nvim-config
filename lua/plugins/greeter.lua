@@ -30,7 +30,7 @@ return {
 			dashboard.button("f", "🗎  Find file", ":Telescope find_files<CR>"),
 			dashboard.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
 		}
-		dashboard.section.footer.val = "I Use Neovim BTW"
+		dashboard.section.footer.val = "Best Code Editor Ever!"
 
 		dashboard.config.opts.noautocmd = true
 
