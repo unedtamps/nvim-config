@@ -2,21 +2,21 @@ return {
 	{
 
 		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile", "BufWritePre" },
 		config = function()
 			local conform = require("conform")
 
 			conform.setup({
 				formatters_by_ft = {
-					javascript = { "prettier" },
-					typescript = { "prettier" },
+					javascript = { "prettierd", "prettier " },
+					typescript = { "pretitred", "prettier" },
 					typescriptreact = { "prettier" },
 					json = { "prettier" },
 					html = { "prettier" },
 					go = { "gofumt", "goimports", "golines" },
 					lua = { "stylua" },
-					c = { "clang_format" },
-					cpp = { "clang_format" },
+					c = { "clang-format" },
+					cpp = { "clang-format" },
 					php = { "php_cs_fixer" },
 					blade = { "blade-formatter" },
 					python = { "isort", "black" },
@@ -25,13 +25,15 @@ return {
 					sql = { "sql-formatter" },
 					sh = { "shfmt" },
 					assembly = { "asmfmt" },
+					kotlin = { "ktlint" },
 				},
 
 				format_on_save = {
 					lsp_fallback = true,
 					asyc = false,
-					timeout_ms = 1000,
+					timeout_ms = 500,
 				},
+				notify_on_error = true,
 			})
 
 			vim.keymap.set({ "n", "v" }, "<c-I>", function()

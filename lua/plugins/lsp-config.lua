@@ -8,9 +8,14 @@ return {
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
-		opts = {},
+		-- opts = {},
 		config = function(_, opts)
-			require("lsp_signature").setup(opts)
+			require("lsp_signature").setup({
+				bind = true,
+				handler_opts = {
+					border = "rounded",
+				},
+			})
 		end,
 	},
 	{
@@ -38,42 +43,57 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"lua_ls",
-					"gopls",
-					"intelephense",
-					"tsserver",
-					"r_language_server",
-					"clangd",
-					"html",
-					"htmx",
-					"cssls",
-					"templ",
-					"awk_ls",
-					"tailwindcss",
-					"jdtls",
 					"svelte",
-					"marksman",
-					"jsonls",
-					"hydra_lsp",
-					"sqlls",
+					"ast_grep",
+					"bashls",
+					"templ",
+					"remark_ls",
+					"rust_analyzer",
+					"jdtls",
 					"prismals",
 					"pyright",
-					"bashls",
-					"dockerls",
+					"intelephense",
+					"lua_ls",
+					"jsonls",
+					"gopls",
+					"clangd",
+					"html",
+					"cssls",
+					"biome",
 					"asm_lsp",
+					"awk_ls",
 					"docker_compose_language_service",
-					"rust_analyzer",
+					"dockerls",
+					"htmx",
+					"hydra_lsp",
 					"kotlin_language_server",
+					"marksman",
+					"r_language_server",
+					"sqlls",
+					"sqls",
+					"stimulus_ls",
+					"tailwindcss",
+					"tsserver",
+					"yamlls",
 				},
 			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
+		opts = {
+			inlay_hints = { enabled = true },
+		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local config = require("lspconfig.configs")
+			local signature_setup = {
+				bind = true,
+				handler_opts = {
+					border = "rounded",
+				},
+			}
 			local on_attach = function(_, bufnr)
 				require("lsp-signature").on_attach(signature_setup, bufnr)
 			end
@@ -127,15 +147,15 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
-				lsp_inlay_hints = { enable = false },
-				hints = {
-					assignVariableTypes = true,
-					compositeLiteralFields = true,
-					constantValues = true,
-					functionTypeParameters = true,
-					parameterNames = true,
-					rangeVariableTypes = true,
-				},
+				-- lsp_inlay_hints = { enable = false },
+				-- hints = {
+				-- 	assignVariableTypes = true,
+				-- 	compositeLiteralFields = true,
+				-- 	constantValues = true,
+				-- 	functionTypeParameters = true,
+				-- 	parameterNames = true,
+				-- 	rangeVariableTypes = true,
+				-- },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
@@ -151,9 +171,8 @@ return {
 				settings = {
 					typescript = {
 						inlayHints = {
-							includeInlayParameterNameHints = "all",
 							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
+							includeInlayFunctionParameterTypeHints = false,
 							includeInlayVariableTypeHints = true,
 							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
 							includeInlayPropertyDeclarationTypeHints = true,
@@ -181,10 +200,10 @@ return {
 			lspconfig.clangd.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
-				cmd = {
-					"clangd",
-					"--offset-encoding=utf-16",
-				},
+				-- cmd = {
+				-- 	"clangd",
+				-- 	"--offset-encoding=utf-16",
+				-- },
 			})
 			-- lspconfig.sqlls.setup({
 			-- 	capabilities = capabilities,

@@ -21,10 +21,9 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set clipboard=unnamedplus")
 vim.cmd("set foldmethod=syntax")
-vim.cmd("set numberwidth=3")
+vim.cmd("set numberwidth=1")
 vim.cmd("set guioptions+=T")
-
-vim.api.nvim_set_option("signcolumn", "yes:2")
+vim.api.nvim_set_option("signcolumn", "yes:1")
 
 vim.g.user_emmet_mode = "n"
 vim.g.user_emmet_leader_key = ","

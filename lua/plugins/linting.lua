@@ -18,7 +18,8 @@ return {
 				java = { "checkstyle" },
 				rust = { "snyk_iac" },
 				sh = { "shellcheck" },
-				-- kotlin = { "ktlint" },
+				make = { "checkmake" },
+				kotlin = { "ktlint" },
 			}
 			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
@@ -46,6 +47,13 @@ return {
 					"phpcs",
 					"golangci-lint",
 					"cpplint",
+					"checkmake",
+					"ktlint",
+					"shellcheck",
+					"checkstyle",
+					"eslint_d",
+					"pylint",
+					"golangci-lint",
 				},
 			})
 		end,
