@@ -87,7 +87,7 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			local config = require("lspconfig.configs")
+			-- local config = require("lspconfig.configs")
 			local signature_setup = {
 				bind = true,
 				handler_opts = {
@@ -98,16 +98,16 @@ return {
 				require("lsp-signature").on_attach(signature_setup, bufnr)
 			end
 
-			config.blade = {
-				default_config = {
-					cmd = { "/home/unedotamps/Koding/PHP/LSP/laravel-dev-tools/laravel-dev-tools", "lsp", "-vvv" },
-					filetypes = { "blade" },
-					root_dir = function(fname)
-						return lspconfig.util.find_git_ancestor(fname)
-					end,
-					settings = {},
-				},
-			}
+			-- config.blade = {
+			-- 	default_config = {
+			-- 		cmd = { "/home/unedotamps/Koding/PHP/LSP/laravel-dev-tools/laravel-dev-tools", "lsp", "-vvv" },
+			-- 		filetypes = { "blade" },
+			-- 		root_dir = function(fname)
+			-- 			return lspconfig.util.find_git_ancestor(fname)
+			-- 		end,
+			-- 		settings = {},
+			-- 	},
+			-- }
 			lspconfig.kotlin_language_server.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -117,10 +117,10 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
-			lspconfig.blade.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			-- lspconfig.blade.setup({
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- })
 			lspconfig.asm_lsp.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -229,7 +229,7 @@ return {
 			lspconfig.tailwindcss.setup({
 				capabilities = capabilities,
 				on_attach = on_attach,
-				filetypes = { "templ", "astro", "javascript", "typescript", "typescriptreact", "react", "blade" },
+				filetypes = { "templ", "astro", "javascript", "react", "blade", "typescriptreact" },
 				init_options = { userLanguages = { templ = "html" }, { blade = "html" } },
 			})
 			lspconfig.templ.setup({
@@ -267,7 +267,6 @@ return {
 				})
 			local on_references = vim.lsp.handlers["textDocument/references"]
 			vim.lsp.handlers["textDocument/references"] = vim.lsp.with(on_references, {
-				-- Use location list instead of quickfix list
 				loclist = true,
 			})
 			vim.diagnostic.update_in_insert = false

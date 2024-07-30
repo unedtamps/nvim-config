@@ -21,6 +21,22 @@ return {
 		vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>"),
 		vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>"),
 	},
+	{
+		"ggandor/leap.nvim",
+		dependencies = { "tpope/vim-repeat" },
+		config = function()
+			local leap = require("leap")
+			leap.add_default_mappings()
+			leap.opts.case_sensitive = true
+			leap.opts.max_highlighted_traversal_targets = 10
+			leap.init_highlight(true)
+		end,
+		-- -- vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)"),
+		-- -- vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)"),
+		-- -- vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)"),
+		-- vim.keymap.set("n", "s", "<Plug>(leap)"),
+		-- vim.keymap.set("n", "S", "<Plug>(leap-from-window)"),
+	},
 	-- {
 	-- 	"akinsho/bufferline.nvim",
 	-- 	version = "*",
