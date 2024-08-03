@@ -19,26 +19,6 @@ return {
 		end,
 	},
 	{
-		"lvimuser/lsp-inlayhints.nvim",
-		config = function()
-			require("lsp-inlayhints").setup({})
-			vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = "LspAttach_inlayhints",
-				callback = function(args)
-					if not (args.data and args.data.client_id) then
-						return
-					end
-
-					local bufnr = args.buf
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					require("lsp-inlayhints").on_attach(client, bufnr)
-				end,
-			})
-		end,
-	},
-
-	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
@@ -81,22 +61,30 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		opts = {
-			inlay_hints = { enabled = true },
-		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			-- local config = require("lspconfig.configs")
-			local signature_setup = {
-				bind = true,
-				handler_opts = {
-					border = "rounded",
-				},
-			}
-			local on_attach = function(_, bufnr)
-				require("lsp-signature").on_attach(signature_setup, bufnr)
+			local on_attach = function(client, bufnr)
+				if vim.lsp.inlay_hint then
+					if client.server_capabilities.inlayHintProvider then
+						vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+						-- else
+						-- 	print("Warning: Inlay hints not available from server")
+					end
+					-- else
+					-- 	print("Warning: Inlay hints not available in this version of Neovim")
+				end
 			end
+			-- local config = require("lspconfig.configs")
+			-- local signature_setup = {
+			-- 	bind = true,
+			-- 	handler_opts = {
+			-- 		border = "rounded",
+			-- 	},
+			-- }
+			-- local on_attach = function(_, bufnr)
+			-- 	require("lsp-signature").on_attach(signature_setup, bufnr)
+			-- end
 
 			-- config.blade = {
 			-- 	default_config = {
@@ -121,6 +109,7 @@ return {
 			-- 	on_attach = on_attach,
 			-- 	capabilities = capabilities,
 			-- })
+
 			lspconfig.asm_lsp.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -129,6 +118,13 @@ return {
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+				settings = {
+					Lua = {
+						hint = {
+							enable = true,
+						},
+					},
+				},
 			})
 			lspconfig.r_language_server.setup({
 				on_attach = on_attach,
@@ -137,6 +133,13 @@ return {
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,
 				filetypes = { "rust" },
+				inlayHints = {
+					enable = true,
+					typeHints = true,
+					parameterHints = true,
+					chainingHints = true,
+					maxLength = 120,
+				},
 			})
 			lspconfig.docker_compose_language_service.setup({
 				on_attach = on_attach,
@@ -147,7 +150,19 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
-				-- lsp_inlay_hints = { enable = false },
+				settings = {
+					gopls = {
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
+						},
+					},
+				},
 				-- hints = {
 				-- 	assignVariableTypes = true,
 				-- 	compositeLiteralFields = true,
@@ -238,6 +253,22 @@ return {
 			lspconfig.jdtls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+				handlers = {
+					["language/status"] = function(_, result, ctx, _)
+						if result.type == "ServiceReady" then
+							for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(ctx.client_id)) do
+								vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+							end
+						end
+					end,
+				},
+
+				settings = {
+					java = {
+						inlayHints = { parameterNames = { enabled = "all" } },
+						signatureHelp = { enabled = true },
+					},
+				},
 			})
 			lspconfig.svelte.setup({
 				on_attach = on_attach,
