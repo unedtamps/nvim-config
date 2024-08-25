@@ -9,6 +9,7 @@ return {
 	},
 	config = function()
 		require("neo-tree").setup({
+			close_if_last_window = true,
 			filesystem = {
 				filtered_items = {
 					visible = true,
@@ -20,11 +21,13 @@ return {
 				},
 			},
 			indent = {
-				padding = 0,
+				indent_size = 1,
+				padding = 0, -- extra padding on left hand side
+				-- indent guides
 			},
 			icon = {
 				folder_closed = "",
-				folder_open = "",
+				folder_open = "🗁",
 				folder_empty = "󰜌",
 				-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
 				-- then these will never be used.

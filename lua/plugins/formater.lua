@@ -22,7 +22,7 @@ return {
 					java = { "google-java-format" },
 					sql = { "sql-formatter" },
 					sh = { "shfmt" },
-					assembly = { "asmfmt" },
+					asm = { "asmfmt" },
 					kotlin = { "ktlint" },
 				},
 

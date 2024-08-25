@@ -23,6 +23,7 @@ return {
 			violet = "#d183e8",
 			grey = "#303030",
 			c_color = "#021526",
+			neon = "#53E8D4",
 		}
 
 		local bubbles_theme = {

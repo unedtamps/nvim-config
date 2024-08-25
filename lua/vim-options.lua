@@ -41,6 +41,11 @@ augroup BladeFiltypeRelated
 augroup END
 ]])
 
+-- vim.cmd([[
+--   highlight DiagnosticSignError guifg=#FF0000
+--   sign define DiagnosticSignError text=✗ texthl=DiagnosticSignError numhl=DiagnosticSignError
+-- ]])
+
 vim.api.nvim_exec(
 	[[
   autocmd FileType html,xml,xsl,jsx,tsx,js,json,php,vue EmmetInstall

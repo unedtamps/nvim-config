@@ -183,31 +183,31 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.tsserver.setup({
-				settings = {
-					typescript = {
-						inlayHints = {
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = false,
-							includeInlayVariableTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-					javascript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-				},
+				-- settings = {
+				-- 	typescript = {
+				-- 		inlayHints = {
+				-- 			includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+				-- 			includeInlayFunctionParameterTypeHints = false,
+				-- 			includeInlayVariableTypeHints = true,
+				-- 			includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+				-- 			includeInlayPropertyDeclarationTypeHints = true,
+				-- 			includeInlayFunctionLikeReturnTypeHints = true,
+				-- 			includeInlayEnumMemberValueHints = true,
+				-- 		},
+				-- 	},
+				-- 	javascript = {
+				-- 		inlayHints = {
+				-- 			includeInlayParameterNameHints = "all",
+				-- 			includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+				-- 			includeInlayFunctionParameterTypeHints = true,
+				-- 			includeInlayVariableTypeHints = true,
+				-- 			includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+				-- 			includeInlayPropertyDeclarationTypeHints = true,
+				-- 			includeInlayFunctionLikeReturnTypeHints = true,
+				-- 			includeInlayEnumMemberValueHints = true,
+				-- 		},
+				-- 	},
+				-- },
 
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -215,6 +215,24 @@ return {
 			lspconfig.clangd.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+				settings = {
+					clangd = {
+						fileStatus = true,
+						fallbackFlags = { "-std=c++17" },
+						showOrigins = true,
+						compileCommands = { "build" },
+						semanticHighlighting = true,
+						crossFileRename = true,
+						-- completion = {
+						--   -- clangd will automatically enable completion for C and C++.
+						--   -- You can use the following section to enable completion for other languages.
+						--   -- enum = { "Enum1", "Enum2" },
+						--   -- macro = { "Macro1", "Macro2" },
+						--   -- typedef = { "Typedef1", "Typedef2" },
+						--   -- global = true,
+						-- },
+					},
+				},
 				-- cmd = {
 				-- 	"clangd",
 				-- 	"--offset-encoding=utf-16",
@@ -301,6 +319,23 @@ return {
 				loclist = true,
 			})
 			vim.diagnostic.update_in_insert = false
+
+			vim.diagnostic.config({
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "",
+						[vim.diagnostic.severity.WARN] = "",
+					},
+					linehl = {
+						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+					},
+					numhl = {
+						[vim.diagnostic.severity.WARN] = "WarningMsg",
+						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+					},
+				},
+			})
+
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
 			vim.keymap.set("n", "H", vim.lsp.buf.hover, {})
