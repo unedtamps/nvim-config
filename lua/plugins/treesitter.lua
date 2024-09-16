@@ -2,7 +2,12 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		config = function()
+		config = function(_, opts)
+			vim.filetype.add({
+				pattern = {
+					[".*%.blade%.php"] = "blade",
+				},
+			})
 			local config = require("nvim-treesitter.configs")
 			local parser = require("nvim-treesitter.parsers").get_parser_configs()
 			parser.blade = {
@@ -29,6 +34,7 @@ return {
 					"toml",
 					"templ",
 					"blade",
+					"php_only",
 				},
 				highlight = { enable = true },
 				indent = { enable = true },

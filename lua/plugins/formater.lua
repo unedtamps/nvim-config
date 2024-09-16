@@ -15,7 +15,7 @@ return {
 					lua = { "stylua" },
 					c = { "clang-format" },
 					cpp = { "clang-format" },
-					php = { "php_cs_fixer" },
+					php = { "phpcbf" },
 					blade = { "blade-formatter" },
 					python = { "isort", "black" },
 					yaml = { "yamlfmt" },
@@ -29,7 +29,7 @@ return {
 				format_on_save = {
 					lsp_fallback = true,
 					asyc = false,
-					timeout_ms = 1500,
+					timeout_ms = 10000,
 				},
 				notify_on_error = true,
 			})
@@ -38,7 +38,7 @@ return {
 				conform.format({
 					lsp_fallback = true,
 					asyc = false,
-					timeout_ms = 1500,
+					timeout_ms = 10000,
 				})
 			end, { desc = "Format file on range (invisual mode)" })
 		end,

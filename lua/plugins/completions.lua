@@ -22,8 +22,8 @@ return {
 				"hrsh7th/cmp-cmdline",
 			},
 			opts = function()
+				require("luasnip.loaders.from_vscode").load()
 				vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-				require("luasnip.loaders.from_vscode").lazy_load()
 				local cmp = require("cmp")
 				local defaults = require("cmp.config.default")()
 				cmp.setup.cmdline(":", {
@@ -44,7 +44,8 @@ return {
 								"typescript",
 								"javascript",
 								"typescriptreact",
-								"templ"
+								"templ",
+								"blade"
 							)
 						end,
 					},

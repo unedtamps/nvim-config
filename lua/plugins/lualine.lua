@@ -12,7 +12,7 @@ return {
 			for _, client in ipairs(buf_clients) do
 				table.insert(client_names, client.name)
 			end
-			return "🔧Lsp: " .. table.concat(client_names, ", ")
+			return "lsp: " .. table.concat(client_names, ", ")
 		end
 		local colors = {
 			blue = "#80a0ff",

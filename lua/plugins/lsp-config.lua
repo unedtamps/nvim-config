@@ -177,6 +177,13 @@ return {
 			lspconfig.intelephense.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
+				settings = {
+					intelephense = {
+						diagnostics = {
+							ignoredCodes = { "1003" },
+						},
+					},
+				},
 			})
 			lspconfig.bashls.setup({
 				on_attach = on_attach,
@@ -308,6 +315,13 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
+
+			-- Set the text color for virtual text diagnostics
+			vim.api.nvim_command("highlight DiagnosticVirtualTextError guifg=#fa1616 guibg=NONE")
+			vim.api.nvim_command("highlight DiagnosticVirtualTextWarn guifg=#f1fa8c guibg=NONE")
+			vim.api.nvim_command("highlight DiagnosticVirtualTextInfo guifg=#8be9fd guibg=NONE")
+			vim.api.nvim_command("highlight DiagnosticVirtualTextHint guifg=#50fa7b guibg=NONE")
+
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 					underline = false,
@@ -347,5 +361,12 @@ return {
 	},
 	{
 		"nvim-lua/lsp-status.nvim",
+	},
+	{
+		"ricardoramirezr/blade-nav.nvim",
+		dependencies = {
+			"hrsh7th/nvim-cmp",
+		},
+		ft = { "blade", "php" },
 	},
 }
