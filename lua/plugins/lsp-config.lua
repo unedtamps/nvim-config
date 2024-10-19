@@ -185,10 +185,10 @@ return {
 					},
 				},
 			})
-			lspconfig.bashls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			-- lspconfig.bashls.setup({
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- })
 			lspconfig.tsserver.setup({
 				-- settings = {
 				-- 	typescript = {
@@ -334,21 +334,21 @@ return {
 			})
 			vim.diagnostic.update_in_insert = false
 
-			vim.diagnostic.config({
-				signs = {
-					text = {
-						[vim.diagnostic.severity.ERROR] = "",
-						[vim.diagnostic.severity.WARN] = "",
-					},
-					linehl = {
-						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
-					},
-					numhl = {
-						[vim.diagnostic.severity.WARN] = "WarningMsg",
-						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
-					},
-				},
-			})
+			-- vim.diagnostic.config({
+			-- 	signs = {
+			-- 		text = {
+			-- 			[vim.diagnostic.severity.ERROR] = "",
+			-- 			[vim.diagnostic.severity.WARN] = "",
+			-- 		},
+			-- 		linehl = {
+			-- 			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+			-- 		},
+			-- 		numhl = {
+			-- 			[vim.diagnostic.severity.WARN] = "WarningMsg",
+			-- 			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+			-- 		},
+			-- 	},
+			-- })
 
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
