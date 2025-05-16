@@ -24,10 +24,10 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
-vim.cmd("set clipboard=unnamedplus")
+vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("set foldmethod=syntax")
 vim.cmd("set numberwidth=1")
-vim.cmd("set guioptions+=T")
+-- vim.cmd("set guioptions+=T")
 vim.api.nvim_set_option("signcolumn", "yes:1")
 
 -- Clear the background for virtual text diagnostics

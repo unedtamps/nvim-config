@@ -48,12 +48,11 @@ return {
 					"hydra_lsp",
 					"kotlin_language_server",
 					"marksman",
-					"r_language_server",
 					"sqlls",
 					"sqls",
 					"stimulus_ls",
 					"tailwindcss",
-					"tsserver",
+					"ts_ls",
 					"yamlls",
 				},
 			})
@@ -126,10 +125,10 @@ return {
 					},
 				},
 			})
-			lspconfig.r_language_server.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			-- lspconfig.r_language_server.setup({
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- })
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,
 				filetypes = { "rust" },
@@ -189,7 +188,7 @@ return {
 			-- 	on_attach = on_attach,
 			-- 	capabilities = capabilities,
 			-- })
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				-- settings = {
 				-- 	typescript = {
 				-- 		inlayHints = {

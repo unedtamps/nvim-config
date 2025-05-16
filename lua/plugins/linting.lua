@@ -16,7 +16,7 @@ return {
 				cpp = { "cpplint" },
 				python = { "pylint", "ruff" },
 				java = { "checkstyle" },
-				rust = { "snyk_iac" },
+				-- rust = { "snyk" },
 				sh = { "shellcheck" },
 				make = { "checkmake" },
 				kotlin = { "ktlint" },
